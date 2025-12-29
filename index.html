@@ -3,223 +3,272 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Code Vimarsh | Coding Club</title>
-<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/1005/1005141.png">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<title>Code Vimarsh | Think Beyond Code</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-html {
-  scroll-behavior: smooth; 
-}
+/* --- 1. Variables & Themes --- */
 :root {
-  --bg-1: #020617; --bg-2: #020617; --bg-3: #0b1026;
-  --text: #e5e7eb; --text-muted: #94a3b8;
-  --accent: #22d3ee; --accent-2: #a78bfa;
-  --card: rgba(15, 23, 42, 0.75); --border: rgba(255, 255, 255, 0.08);
+  --bg-1: #020617; 
+  --text-main: #ffffff;
+  --text-muted: #a1a1aa;
+  --accent-cyan: #22d3ee;
+  --accent-purple: #a78bfa;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  
+  /* Hero Text Gradient (Dark Mode) */
+  --hero-gradient: linear-gradient(to bottom right, #ffffff 30%, rgba(255,255,255,0.4));
 }
+
 .light {
-  --bg-1: #f8fafc; --bg-2: #eef2ff; --bg-3: #e0e7ff;
-  --text: #020617; --text-muted: #334155;
-  --accent: #2563eb; --accent-2: #7c3aed;
-  --card: rgba(255, 255, 255, 0.9); --border: rgba(0, 0, 0, 0.1);
+  --bg-1: #eef2ff;
+  --text-main: #020617;
+  --text-muted: #475569;
+  --accent-cyan: #0891b2;
+  --accent-purple: #7c3aed;
+  
+  /* Glass adjustments for Light Mode */
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --hero-gradient: linear-gradient(to bottom right, #020617 30%, rgba(2,6,23,0.6));
 }
 
-* { box-sizing: border-box; transition: all 0.3s ease; }
+* { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+html { scroll-behavior: smooth; }
+
 body {
-  margin: 0; font-family: 'Poppins', sans-serif; color: var(--text);
-  background: radial-gradient(circle at 20% 20%, rgba(34,211,238,0.08), transparent 40%),
-              radial-gradient(circle at 80% 30%, rgba(167,139,250,0.08), transparent 45%),
-              linear-gradient(120deg, var(--bg-1), var(--bg-3), var(--bg-2));
-  background-size: 200% 200%; animation: liveGrad 18s ease infinite; min-height: 100vh;
+  margin: 0; 
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-1);
+  color: var(--text-main);
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
 }
-@keyframes liveGrad { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
-/* Header & Nav */
+/* --- 2. Background Animation --- */
+.blob-cont {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; overflow: hidden; pointer-events: none;
+}
+.blob {
+  position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5;
+  animation: float 12s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+.blob:nth-child(1) { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--accent-cyan); }
+.blob:nth-child(2) { bottom: -10%; right: -10%; width: 45vw; height: 45vw; background: var(--accent-purple); animation-delay: -5s; }
+.blob:nth-child(3) { top: 40%; left: 30%; width: 30vw; height: 30vw; background: rgba(34, 211, 238, 0.15); animation-duration: 18s; }
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, 60px) scale(1.1); }
+}
+
+/* --- 3. Navbar --- */
 header {
-  position: sticky; top: 0; z-index: 100; padding: 15px 10%;
-  background: rgba(15, 23, 42, 0.25); backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  background: rgba(10, 10, 20, 0.3); backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  padding: 12px 30px; border-radius: 50px;
+  display: flex; align-items: center; gap: 40px;
+  z-index: 100; box-shadow: 0 10px 40px rgba(0,0,0,0.1);
 }
-header h1 {
-  font-size: 1.5rem; font-weight: 900; margin: 0;
-  background: linear-gradient(to right, var(--accent), var(--accent-2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-nav a { text-decoration: none; color: var(--text-muted); margin-left: 20px; font-weight: 500; }
-nav a:hover { color: var(--accent); }
+.light header { background: rgba(255, 255, 255, 0.5); }
 
-/* Layouts */
-section { padding: 60px 20px; text-align: center; }
-.hero { padding: 120px 20px; }
+header h1 { font-size: 1.1rem; font-weight: 800; margin: 0; letter-spacing: 0.5px; color: var(--text-main); }
+nav { display: flex; gap: 25px; }
+nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
+nav a:hover { color: var(--accent-cyan); }
+.theme-btn { background: transparent; border: none; color: var(--text-main); cursor: pointer; font-size: 1.1rem; }
+
+/* --- 4. Hero Section --- */
+.hero {
+  min-height: 90vh; display: flex; flex-direction: column; 
+  justify-content: center; align-items: center; text-align: center; padding: 0 20px;
+}
 .hero h2 {
-  font-size: clamp(2.5rem, 6vw, 4.5rem); margin: 0 0 15px; font-weight: 900;
-  background: linear-gradient(to bottom, var(--text), var(--text-muted));
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(3.5rem, 9vw, 7rem); margin: 0; line-height: 1; font-weight: 700;
+  background: var(--hero-gradient);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 30px rgba(100,100,100,0.1));
+}
+.hero p {
+  font-size: 1.2rem; color: var(--text-muted); max-width: 550px; margin-top: 25px; line-height: 1.7;
 }
 
-/* Cards */
-.card-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; padding: 20px 10%; }
-.card {
-  background: var(--card); backdrop-filter: blur(14px); border: 1px solid var(--border);
-  border-radius: 20px; padding: 30px; text-align: center;
+/* Glass Button */
+.glass-btn {
+  margin-top: 40px; padding: 16px 40px; border-radius: 30px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  color: var(--text-main); font-weight: 600; text-decoration: none;
+  backdrop-filter: blur(10px); position: relative; overflow: hidden;
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.1);
 }
-.card:hover { transform: translateY(-8px); border-color: var(--accent); }
-.card h4 { color: var(--accent); margin: 10px 0 5px; font-size: 1.1rem; }
-.card h3 { font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; }
+.glass-btn:hover {
+  background: rgba(34, 211, 238, 0.15); border-color: var(--accent-cyan);
+  transform: translateY(-3px);
+}
 
-/* Avatar */
-.avatar {
-  width: 80px; height: 80px; margin: 0 auto 15px; border-radius: 20px; overflow: hidden;
-  border: 2px solid var(--border);
-}
-.avatar img { width: 100%; height: 100%; object-fit: cover; }
-.card:hover .avatar { border-color: var(--accent); box-shadow: 0 0 20px rgba(34, 211, 238, 0.3); }
+/* --- 5. Bento Grid --- */
+section { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
+.section-head { font-size: 2.5rem; font-weight: 700; margin-bottom: 50px; color: var(--text-main); }
+.section-head span { color: var(--accent-cyan); }
 
-/* Form & Inputs */
-form { max-width: 450px; background: var(--card); padding: 35px; border-radius: 24px; border: 1px solid var(--border); margin: 40px auto; }
-input {
-  width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 10px; border: 1px solid var(--border);
-  background: rgba(0,0,0,0.05); color: var(--text); outline: none;
+.bento-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;
 }
-input:focus { border-color: var(--accent); }
-button {
-  width: 100%; padding: 14px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #000;
+.bento-item {
+  background: var(--glass-bg); 
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  border-radius: 24px; padding: 35px; position: relative; overflow: hidden;
+  transition: 0.4s;
+  cursor: pointer; /* Makes it look clickable */
 }
-button:hover { filter: brightness(1.1); box-shadow: 0 0 20px var(--accent); }
-button:disabled { opacity: 0.7; cursor: not-allowed; }
+.bento-item:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
+}
 
-/* Footer & Utils */
-footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--border); margin-top: 40px; }
-.social-links a { margin: 0 10px; color: var(--text-muted); font-size: 1.2rem; text-decoration: none; }
-.social-links a:hover { color: var(--accent); }
-.spinner {
-  width: 16px; height: 16px; border: 2px solid #000; border-top-color: transparent; border-radius: 50%;
-  display: inline-block; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 8px;
+.bento-item h3 { font-size: 1.5rem; margin: 0 0 10px; font-weight: 600; color: var(--text-main); }
+.bento-item p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+.bento-tag {
+  display: inline-block; margin-top: 20px; padding: 6px 14px;
+  border-radius: 20px; font-size: 0.8rem; font-weight: 600; 
+  background: rgba(34, 211, 238, 0.1); color: var(--accent-cyan);
+  border: 1px solid rgba(34, 211, 238, 0.2);
 }
-@keyframes spin { to { transform: rotate(360deg); } }
-@media (max-width: 768px) { header { flex-direction: column; gap: 10px; } }
+
+/* Team Avatar */
+.avatar { width: 70px; height: 70px; border-radius: 50%; margin-bottom: 20px; border: 2px solid var(--glass-border); padding: 3px; }
+.avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+
+/* Scroll Animation */
+.hidden { opacity: 0; transform: translateY(40px); filter: blur(5px); transition: 1s ease; }
+.show { opacity: 1; transform: translateY(0); filter: blur(0); }
+.stagger-1 { transition-delay: 100ms; }
+.stagger-2 { transition-delay: 200ms; }
+.stagger-3 { transition-delay: 300ms; }
+
+/* Footer */
+footer { text-align: center; padding: 50px 0; border-top: 1px solid var(--glass-border); margin-top: 50px; color: var(--text-muted); background: rgba(0,0,0,0.02); }
+
+/* Mobile */
+@media (max-width: 768px) {
+  header { width: 90%; justify-content: space-between; padding: 10px 20px; }
+  nav { display: none; }
+  .hero h2 { font-size: 3.5rem; }
+}
 </style>
 </head>
-
 <body>
+
+<div class="blob-cont">
+  <div class="blob"></div>
+  <div class="blob"></div>
+  <div class="blob"></div>
+</div>
 
 <header>
   <h1>Code Vimarsh</h1>
   <nav>
-    <a href="#home">Home</a>
+    <a href="index.html">Home</a>
     <a href="#events">Events</a>
     <a href="#team">Team</a>
-    <button onclick="toggleMode()" style="width: auto; padding: 6px 12px; margin-left: 10px;">🌓</button>
   </nav>
+  <button class="theme-btn" onclick="toggleMode()">
+    <i class="fas fa-adjust"></i>
+  </button>
 </header>
 
-<section class="hero" id="home">
-  <h2>Think. Code. Innovate.</h2>
-  <p>Empowering students to build real-world tech skills.</p>
+<section class="hero">
+  <h2 class="hidden">Think Beyond<br>The Code.</h2>
+  <p class="hidden stagger-1">Join the community where logic meets creativity. We don't just compile code; we compile ideas for the future.</p>
+  <a href="join.html" class="glass-btn hidden stagger-2">Start Your Journey <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
 </section>
 
-<section id="events">
-  <h2>Upcoming Events</h2>
-  <div class="card-container">
-    <div class="card"><h3>Competitive Programming</h3><p>15 March 2025</p></div>
-    <div class="card"><h3>Web Bootcamp</h3><p>28 March 2025</p></div>
-    <div class="card"><h3>AI & ML Workshop</h3><p>10 April 2025</p></div>
-  </div>
-</section>
-
-<section id="team">
-  <h2>Meet the Team</h2>
-  <div class="card-container">
-    <div class="card">
-      <div class="avatar"><img src="https://i.ibb.co/84jm7bTM/president-jpg.jpg" alt="Krupal"></div>
-      <h4>Krupal Patel</h4><h3>President</h3>
+<section id="events" class="hidden">
+  <div class="section-head">Club <span style="font-family: 'Space Grotesk';">Activities</span></div>
+  <div class="bento-grid">
+    <div class="bento-item hidden stagger-1" onclick="window.location.href='details.html?id=algo'">
+      <h3>Algorithm Arena</h3>
+      <p>Weekly competitive programming battles to sharpen your DSA skills.</p>
+      <span class="bento-tag">MAR 15</span>
     </div>
-    <div class="card">
-      <div class="avatar"><img src="https://i.ibb.co/5xv9BRk5/team-member-jpg.jpg" alt="Shivam"></div>
-      <h4>Shivam Parmar</h4><h3>Vice President</h3>
+    <div class="bento-item hidden stagger-2" onclick="window.location.href='details.html?id=web3'">
+      <h3>Web3 & Blockchain</h3>
+      <p>Understanding Decentralized Finance and Smart Contracts.</p>
+      <span class="bento-tag" style="color: var(--accent-purple); border-color: var(--accent-purple); background: rgba(167, 139, 250, 0.1);">MAR 28</span>
     </div>
-    <div class="card">
-      <div class="avatar"><img src="https://i.ibb.co/hJ6Vv5PZ/tech-lead-jpg.jpg" alt="Jay"></div>
-      <h4>Jay Prajapati</h4><h3>Tech Lead</h3>
+    <div class="bento-item hidden stagger-3" onclick="window.location.href='details.html?id=genai'">
+      <h3>GenAI Workshop</h3>
+      <p>Building LLM applications using OpenAI and LangChain.</p>
+      <span class="bento-tag">APR 10</span>
     </div>
   </div>
 </section>
 
-<section id="join">
-  <div style="text-align:center; margin-bottom: 30px;">
-    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent);" id="memberCount">0</div>
-    <p style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">Future Engineers Joined</p>
+<section id="team" class="hidden">
+  <div class="section-head">The <span style="font-family: 'Space Grotesk';">Core Team</span></div>
+  <div class="bento-grid">
+    <div class="bento-item hidden stagger-1" onclick="window.location.href='details.html?id=krupal'" style="text-align: center;">
+      <div class="avatar" style="margin: 0 auto 20px;"><img src="https://i.ibb.co/84jm7bTM/president-jpg.jpg"></div>
+      <h3>Krupal Patel</h3>
+      <p style="color: var(--accent-cyan); font-weight: bold;">PRESIDENT</p>
+    </div>
+    <div class="bento-item hidden stagger-2" onclick="window.location.href='details.html?id=shivam'" style="text-align: center;">
+      <div class="avatar" style="margin: 0 auto 20px;"><img src="https://i.ibb.co/5xv9BRk5/team-member-jpg.jpg"></div>
+      <h3>Shivam Parmar</h3>
+      <p style="color: var(--accent-purple); font-weight: bold;">VICE PRESIDENT</p>
+    </div>
+    <div class="bento-item hidden stagger-3" onclick="window.location.href='details.html?id=jay'" style="text-align: center;">
+      <div class="avatar" style="margin: 0 auto 20px;"><img src="https://i.ibb.co/hJ6Vv5PZ/tech-lead-jpg.jpg"></div>
+      <h3>Jay Prajapati</h3>
+      <p style="color: var(--accent-cyan); font-weight: bold;">TECH LEAD</p>
+    </div>
   </div>
-  
-  <form id="joinForm">
-    <h3 style="margin-top:0; text-align:center;">Join Code Vimarsh</h3>
-    <input type="text" name="name" placeholder="Your Name" required minlength="3">
-    <input type="email" name="email" placeholder="College Email" required>
-    <input type="text" name="branch" placeholder="Branch" required>
-    <button type="submit" id="submitBtn">Join Now 🚀</button>
-    <p id="msg" style="text-align:center; margin-top:15px; font-size:0.9rem;"></p>
-  </form>
 </section>
 
 <footer>
-  <div class="social-links">
-    <a href="#" target="_blank">GitHub</a>
-    <a href="#" target="_blank">LinkedIn</a>
-    <a href="#" target="_blank">Discord</a>
-  </div>
-  <p style="margin-top:15px; opacity: 0.7;">© 2025 Code Vimarsh • Think. Code. Innovate.</p>
+  <p>© 2025 Code Vimarsh • Designed for Tomorrow</p>
 </footer>
 
 <script>
-// --- 1. Theme Toggle ---
+// Scroll Animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) entry.target.classList.add('show');
+  });
+});
+document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
+
+// Theme Toggle
 function toggleMode() {
   const body = document.body;
   body.classList.toggle("light");
+  
+  const btn = document.querySelector('.theme-btn i');
+  if(body.classList.contains('light')) {
+    btn.classList.remove('fa-adjust');
+    btn.classList.add('fa-moon');
+  } else {
+    btn.classList.add('fa-adjust');
+    btn.classList.remove('fa-moon');
+  }
+
   localStorage.setItem("theme", body.classList.contains("light") ? "light" : "dark");
 }
-if(localStorage.getItem("theme") === "light") document.body.classList.add("light");
 
-// --- 2. Animated Counter ---
-window.addEventListener('load', () => {
-  let count = 0, target = 150, el = document.getElementById("memberCount");
-  let timer = setInterval(() => {
-    count += target / 100;
-    if(count >= target) { el.innerText = target + "+"; clearInterval(timer); }
-    else el.innerText = Math.floor(count);
-  }, 20);
-});
-
-// --- 3. Form Submission ---
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKj1UAXwGzt5oktQrMo4KoMudeKcWJ_AYPSyDAjV1MQYvPaocmW8HLmXT2d727GzCB/exec"; 
-const form = document.getElementById("joinForm");
-const msg = document.getElementById("msg");
-const btn = document.getElementById("submitBtn");
-
-form.addEventListener("submit", e => {
-  e.preventDefault();
-  
-  // Optional: Domain Validation
-  // if (!form.email.value.endsWith("@yourcollege.edu")) {
-  //   msg.innerText = "❌ Use college email only!"; msg.style.color = "#ff4d4d"; return;
-  // }
-
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Processing...';
-  msg.innerText = "";
-
-  fetch(SCRIPT_URL, { method: "POST", body: new FormData(form) })
-    .then(() => {
-      msg.innerText = "🎉 Welcome! Check your inbox."; msg.style.color = "var(--accent)";
-      form.reset();
-    })
-    .catch(() => {
-      msg.innerText = "❌ Error. Try again."; msg.style.color = "#ff4d4d";
-    })
-    .finally(() => {
-      btn.disabled = false; btn.innerHTML = "Join Now 🚀";
-    });
-});
+if(localStorage.getItem("theme") === "light") {
+  document.body.classList.add("light");
+  // Update icon for initial load if light
+  const btn = document.querySelector('.theme-btn i');
+  if(btn) { btn.classList.remove('fa-adjust'); btn.classList.add('fa-moon'); }
+}
 </script>
 
 </body>
