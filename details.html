@@ -2,191 +2,100 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Details | Code Vimarsh</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
-/* --- COPYING THEME FROM INDEX.HTML FOR CONSISTENCY --- */
-:root {
-  --bg-1: #020617; --text-main: #ffffff; --text-muted: #a1a1aa;
-  --accent-cyan: #22d3ee; --accent-purple: #a78bfa;
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.03);
-}
-.light {
-  --bg-1: #eef2ff; --text-main: #020617; --text-muted: #475569;
-  --accent-cyan: #0891b2; --accent-purple: #7c3aed;
-  --glass-border: rgba(0, 0, 0, 0.1); --glass-bg: rgba(255, 255, 255, 0.6);
-}
-* { box-sizing: border-box; transition: all 0.3s; }
-body {
-  margin: 0; font-family: 'Outfit', sans-serif;
-  background-color: var(--bg-1); color: var(--text-main);
-  min-height: 100vh; display: flex; flex-direction: column; align-items: center;
-}
+/* Theme Consistency */
+:root { --bg-1: #020617; --text-main: #ffffff; --text-muted: #a1a1aa; --accent-cyan: #22d3ee; --accent-purple: #a78bfa; --glass-border: rgba(255, 255, 255, 0.08); --glass-bg: rgba(255, 255, 255, 0.03); }
+.light { --bg-1: #eef2ff; --text-main: #020617; --text-muted: #475569; --glass-border: rgba(0, 0, 0, 0.1); --glass-bg: rgba(255, 255, 255, 0.6); }
+* { box-sizing: border-box; transition: all 0.3s; -webkit-tap-highlight-color: transparent; }
+body { margin: 0; font-family: 'Outfit', sans-serif; background-color: var(--bg-1); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
 
-/* Background Blobs */
+/* Blobs */
 .blob-cont { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; pointer-events: none; }
-.blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5; animation: float 12s infinite alternate; }
+.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; }
 .blob:nth-child(1) { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--accent-cyan); }
 .blob:nth-child(2) { bottom: -10%; right: -10%; width: 45vw; height: 45vw; background: var(--accent-purple); }
-@keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(40px, 60px) scale(1.1); } }
 
-/* Layout */
+/* Mobile Responsive Layout */
 header {
-  width: 90%; max-width: 800px; margin-top: 30px; display: flex; justify-content: space-between; align-items: center;
-  padding: 15px 30px; border-radius: 50px; background: var(--glass-bg); border: 1px solid var(--glass-border);
-  backdrop-filter: blur(20px);
+  width: 90%; max-width: 800px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 20px; border-radius: 50px; background: var(--glass-bg); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
 }
-.back-btn { text-decoration: none; color: var(--text-muted); font-weight: 600; display: flex; align-items: center; gap: 8px; }
-.back-btn:hover { color: var(--accent-cyan); }
+.back-btn { text-decoration: none; color: var(--text-muted); font-weight: 600; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
 
 .content-card {
-  width: 90%; max-width: 800px; margin-top: 40px; padding: 50px;
+  width: 90%; max-width: 800px; margin: 30px 0 50px; padding: 40px 30px;
   background: var(--glass-bg); border: 1px solid var(--glass-border);
-  border-radius: 30px; backdrop-filter: blur(20px);
-  text-align: center; animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: 24px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  text-align: center;
 }
-@keyframes popUp { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-/* Profile Styles */
-.profile-img {
-  width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
-  border: 4px solid var(--glass-border); padding: 5px; margin-bottom: 20px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.2);
-}
-h1 { font-family: 'Space Grotesk'; font-size: 2.5rem; margin: 10px 0; background: linear-gradient(to right, var(--text-main), var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.badge {
-  display: inline-block; padding: 8px 20px; border-radius: 20px;
-  background: rgba(34, 211, 238, 0.1); color: var(--accent-cyan); border: 1px solid rgba(34, 211, 238, 0.3);
-  font-weight: 700; letter-spacing: 1px; font-size: 0.9rem; margin-bottom: 30px;
-}
-.desc { line-height: 1.8; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 40px; }
+.profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--glass-border); padding: 5px; margin-bottom: 15px; }
+h1 { font-family: 'Space Grotesk'; font-size: 2rem; margin: 10px 0; color: var(--text-main); line-height: 1.2; }
+.badge { display: inline-block; padding: 6px 16px; border-radius: 20px; background: rgba(34, 211, 238, 0.1); color: var(--accent-cyan); font-weight: 700; font-size: 0.8rem; margin-bottom: 20px; }
+.desc { line-height: 1.6; color: var(--text-muted); font-size: 1rem; margin-bottom: 30px; }
 
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: left; }
-.stat-box {
-  padding: 20px; background: rgba(255,255,255,0.03); border-radius: 15px; border: 1px solid var(--glass-border);
-}
-.stat-box h4 { margin: 0 0 5px; color: var(--accent-purple); font-size: 0.9rem; }
-.stat-box p { margin: 0; font-weight: 600; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left; }
+.stat-box { padding: 15px; background: rgba(255,255,255,0.03); border-radius: 15px; border: 1px solid var(--glass-border); }
+.stat-box h4 { margin: 0 0 5px; color: var(--accent-purple); font-size: 0.8rem; }
+.stat-box p { margin: 0; font-weight: 600; font-size: 0.9rem; word-break: break-word; }
 
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; } /* Stack stats on small phone */
+  .content-card { padding: 30px 20px; width: 95%; }
+  h1 { font-size: 1.8rem; }
+}
 </style>
 </head>
 <body>
-
 <div class="blob-cont"><div class="blob"></div><div class="blob"></div></div>
 
 <header>
   <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
-  <button onclick="toggleMode()" style="background:none; border:none; color:var(--text-main); font-size:1.2rem; cursor:pointer;">🌓</button>
+  <button onclick="toggleMode()" style="background:none; border:none; color:var(--text-main); font-size:1.1rem;">🌓</button>
 </header>
 
 <div class="content-card" id="mainContent">
-  <p>Loading...</p>
+  <p style="color: var(--text-muted);">Loading info...</p>
 </div>
 
 <script>
-// --- 1. DATA DATABASE (તમે અહીં માહિતી બદલી શકો છો) ---
+/* --- SAME DATA AS BEFORE (Copy your DB object here) --- */
 const db = {
-  // --- TEAM MEMBERS ---
-  "krupal": {
-    type: "team",
-    name: "Krupal Patel",
-    role: "PRESIDENT",
-    img: "https://i.ibb.co/84jm7bTM/president-jpg.jpg",
-    desc: "As the President of Code Vimarsh, Krupal leads with a vision to bridge the gap between academic theory and industry application. He specializes in Full Stack Development and Team Management.",
-    skills: "React, Node.js, Leadership",
-    contact: "krupal@example.com"
-  },
-  "shivam": {
-    type: "team",
-    name: "Shivam Parmar",
-    role: "VICE PRESIDENT",
-    img: "https://i.ibb.co/5xv9BRk5/team-member-jpg.jpg",
-    desc: "Shivam ensures the smooth execution of all club activities. He has a keen eye for detail and manages the operational side of events. Technically, he loves backend systems.",
-    skills: "Python, Django, Operations",
-    contact: "shivam@example.com"
-  },
-  "jay": {
-    type: "team",
-    name: "Jay Prajapati",
-    role: "TECH LEAD",
-    img: "https://i.ibb.co/hJ6Vv5PZ/tech-lead-jpg.jpg",
-    desc: "Jay is the technical brain behind our projects. Passionate about AI and Cloud Computing, he guides members in solving complex technical problems.",
-    skills: "AWS, TensorFlow, System Design",
-    contact: "jay@example.com"
-  },
-
-  // --- EVENTS ---
-  "algo": {
-    type: "event",
-    name: "Algorithm Arena",
-    role: "MARCH 15, 2025",
-    img: "https://cdn-icons-png.flaticon.com/512/1005/1005141.png", // Icon for event
-    desc: "A high-intensity coding competition designed to test your logic and speed. Participants will solve 5 algorithmic problems in 2 hours. Winners get exclusive swag and certificates.",
-    skills: "Data Structures, Logic",
-    contact: "Main Auditorium"
-  },
-  "web3": {
-    type: "event",
-    name: "Web3 & Blockchain",
-    role: "MARCH 28, 2025",
-    img: "https://cdn-icons-png.flaticon.com/512/7016/7016537.png",
-    desc: "Dive into the world of Decentralized Finance (DeFi). We will cover how Ethereum works, writing Smart Contracts in Solidity, and the future of the internet.",
-    skills: "Solidity, Crypto, DApps",
-    contact: "Lab 3, CS Dept"
-  },
-  "genai": {
-    type: "event",
-    name: "GenAI Workshop",
-    role: "APRIL 10, 2025",
-    img: "https://cdn-icons-png.flaticon.com/512/8637/8637105.png",
-    desc: "Learn how to build your own Chatbot using OpenAI API and Python. This hands-on workshop requires basic Python knowledge. Laptop is mandatory.",
-    skills: "LLMs, Python, API Integration",
-    contact: "Seminar Hall"
-  }
+  "krupal": { type: "team", name: "Krupal Patel", role: "PRESIDENT", img: "https://i.ibb.co/84jm7bTM/president-jpg.jpg", desc: "Leading with a vision to bridge academics and industry.", skills: "React, Node.js", contact: "krupal@example.com" },
+  "shivam": { type: "team", name: "Shivam Parmar", role: "VICE PRESIDENT", img: "https://i.ibb.co/5xv9BRk5/team-member-jpg.jpg", desc: "Manages the operational side of events seamlessly.", skills: "Python, Django", contact: "shivam@example.com" },
+  "jay": { type: "team", name: "Jay Prajapati", role: "TECH LEAD", img: "https://i.ibb.co/hJ6Vv5PZ/tech-lead-jpg.jpg", desc: "Technical brain behind our projects and AI research.", skills: "AWS, AI/ML", contact: "jay@example.com" },
+  "algo": { type: "event", name: "Algorithm Arena", role: "MARCH 15", img: "https://cdn-icons-png.flaticon.com/512/1005/1005141.png", desc: "Solve 5 algorithmic problems in 2 hours. Win swag.", skills: "DSA, Logic", contact: "Auditorium" },
+  "web3": { type: "event", name: "Web3 Summit", role: "MARCH 28", img: "https://cdn-icons-png.flaticon.com/512/7016/7016537.png", desc: "Intro to DeFi and Smart Contracts.", skills: "Solidity", contact: "CS Lab" },
+  "genai": { type: "event", name: "GenAI Workshop", role: "APRIL 10", img: "https://cdn-icons-png.flaticon.com/512/8637/8637105.png", desc: "Build Chatbots with OpenAI API.", skills: "Python, LLMs", contact: "Seminar Hall" }
 };
 
-// --- 2. LOGIC TO LOAD CONTENT ---
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
 const container = document.getElementById('mainContent');
 
 if (db[id]) {
   const data = db[id];
-  // Different styling for Team vs Event image
-  const imgStyle = data.type === 'team' ? '' : 'border-radius: 10px; border:none; width: 100px; height: 100px;';
-  
+  const imgStyle = data.type === 'team' ? '' : 'border-radius: 12px; border:none; width: 80px; height: 80px;';
   container.innerHTML = `
     <img src="${data.img}" class="profile-img" style="${imgStyle}">
-    <h1>${data.name}</h1>
-    <span class="badge">${data.role}</span>
+    <h1>${data.name}</h1><span class="badge">${data.role}</span>
     <p class="desc">${data.desc}</p>
-    
     <div class="stats-grid">
-      <div class="stat-box">
-        <h4>${data.type === 'team' ? 'TOP SKILLS' : 'KEY TOPICS'}</h4>
-        <p>${data.skills}</p>
-      </div>
-      <div class="stat-box">
-        <h4>${data.type === 'team' ? 'EMAIL' : 'LOCATION'}</h4>
-        <p>${data.contact}</p>
-      </div>
-    </div>
-  `;
-} else {
-  container.innerHTML = `<h1>404</h1><p>Data not found.</p>`;
-}
+      <div class="stat-box"><h4>${data.type==='team'?'SKILLS':'FOCUS'}</h4><p>${data.skills}</p></div>
+      <div class="stat-box"><h4>${data.type==='team'?'CONTACT':'VENUE'}</h4><p>${data.contact}</p></div>
+    </div>`;
+} else { container.innerHTML = `<h3>Not Found</h3>`; }
 
-// --- 3. THEME LOGIC (SAME AS INDEX) ---
 function toggleMode() {
-  const body = document.body; body.classList.toggle("light");
-  localStorage.setItem("theme", body.classList.contains("light") ? "light" : "dark");
+  const b = document.body; b.classList.toggle("light");
+  localStorage.setItem("theme", b.classList.contains("light") ? "light" : "dark");
 }
 if(localStorage.getItem("theme") === "light") document.body.classList.add("light");
-
 </script>
 </body>
 </html>

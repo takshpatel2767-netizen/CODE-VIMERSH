@@ -2,116 +2,82 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Code Vimarsh | Join Us</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Join | Code Vimarsh</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* CSS from index.html (Theme Consistency) */
-:root { --bg-1: #020617; --bg-2: #020617; --bg-3: #0b1026; --text: #e5e7eb; --text-muted: #94a3b8; --accent: #22d3ee; --accent-2: #a78bfa; --card: rgba(15, 23, 42, 0.6); --border: rgba(255, 255, 255, 0.08); }
-.light { --bg-1: #f8fafc; --bg-2: #eef2ff; --bg-3: #e0e7ff; --text: #020617; --text-muted: #334155; --accent: #2563eb; --accent-2: #7c3aed; --card: rgba(255, 255, 255, 0.75); --border: rgba(0, 0, 0, 0.1); }
-* { box-sizing: border-box; transition: all 0.3s; }
-body { margin: 0; font-family: 'Poppins', sans-serif; color: var(--text); background-color: var(--bg-1); min-height: 100vh; display: flex; flex-direction: column; }
+/* CSS Variables & Reset (Same as Index) */
+:root { --bg-1: #020617; --text-main: #ffffff; --text-muted: #a1a1aa; --accent-cyan: #22d3ee; --accent-purple: #a78bfa; --glass-border: rgba(255, 255, 255, 0.08); --glass-bg: rgba(255, 255, 255, 0.03); }
+.light { --bg-1: #eef2ff; --text-main: #020617; --text-muted: #475569; --glass-border: rgba(0, 0, 0, 0.1); --glass-bg: rgba(255, 255, 255, 0.6); }
+* { box-sizing: border-box; transition: all 0.3s; -webkit-tap-highlight-color: transparent; }
+body { margin: 0; font-family: 'Outfit', sans-serif; background-color: var(--bg-1); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
 
-/* Background Animation */
+/* Background */
 .blob-cont { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; pointer-events: none; }
-.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 10s infinite alternate; }
-.blob:nth-child(1) { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--accent); }
-.blob:nth-child(2) { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: var(--accent-2); }
+.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 12s infinite alternate; }
+.blob:nth-child(1) { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--accent-cyan); }
 @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(30px, 50px) scale(1.1); } }
 
-/* Header */
-header { padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); backdrop-filter: blur(10px); }
-header h1 a { text-decoration: none; font-weight: 900; background: linear-gradient(to right, var(--accent), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.5rem;}
-nav a { text-decoration: none; color: var(--text-muted); margin-left: 20px; font-weight: 500; }
-nav a:hover { color: var(--accent); }
+/* Mobile Friendly Form Layout */
+.form-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; }
+form { 
+  width: 100%; max-width: 450px; background: var(--glass-bg); padding: 30px 25px; 
+  border-radius: 24px; border: 1px solid var(--glass-border); 
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  animation: popUp 0.5s ease-out;
+}
+@keyframes popUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-/* Form Styles */
-.form-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
-form { width: 100%; max-width: 450px; background: var(--card); padding: 40px; border-radius: 24px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.3); animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-@keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+input { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.1); color: var(--text-main); outline: none; font-size: 16px; /* Prevents zoom on iPhone */ }
+input:focus { border-color: var(--accent-cyan); background: rgba(34, 211, 238, 0.05); }
 
-input { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid var(--border); background: rgba(0,0,0,0.1); color: var(--text); outline: none; }
-input:focus { border-color: var(--accent); background: rgba(34, 211, 238, 0.05); }
-button { width: 100%; padding: 15px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #000; }
-button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(34,211,238,0.3); }
+/* Buttons Stack on Mobile */
+.btn-group { display: flex; gap: 10px; margin-top: 10px; }
+button, .cancel-btn { padding: 14px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; text-align: center; text-decoration: none; font-size: 1rem; }
+.cancel-btn { flex: 1; border: 1px solid var(--glass-border); color: var(--text-muted); background: transparent; }
+button[type="submit"] { flex: 2; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple)); color: #000; }
+button:disabled { opacity: 0.7; }
 
-footer { text-align: center; padding: 20px; border-top: 1px solid var(--border); font-size: 0.9rem; opacity: 0.7; }
+@media (max-width: 400px) { .btn-group { flex-direction: column; } }
 </style>
 </head>
 <body>
-
-<div class="blob-cont"><div class="blob"></div><div class="blob"></div></div>
-
-<header>
-  <h1><a href="index.html">Code Vimarsh</a></h1>
-  <nav>
-    <a href="index.html">← Back to Home</a>
-    <button onclick="toggleMode()" style="margin-left:10px; background:none; border:1px solid var(--border); color:var(--text); padding:5px 10px; border-radius:5px;">🌓</button>
-  </nav>
-</header>
+<div class="blob-cont"><div class="blob"></div></div>
 
 <div class="form-wrapper">
   <form id="joinForm">
-    <h2 style="margin-top:0; text-align:center; color: var(--accent);">Join the Club 🚀</h2>
-    <p style="text-align:center; margin-bottom: 25px; color: var(--text-muted);">Become a part of the future engineers.</p>
+    <h2 style="margin:0 0 10px; text-align:center; color: var(--text-main);">Join Club</h2>
+    <p style="text-align:center; margin:0 0 25px; color: var(--text-muted); font-size: 0.9rem;">Start your journey today.</p>
     
-    <input type="text" name="name" placeholder="Full Name" required minlength="3">
+    <input type="text" name="name" placeholder="Full Name" required>
     <input type="email" name="email" placeholder="College Email" required>
-    <input type="text" name="branch" placeholder="Branch (e.g. CE, IT)" required>
+    <input type="text" name="branch" placeholder="Branch (e.g. IT)" required>
     
-    <div style="display: flex; gap: 15px; margin-top: 10px;">
-        
-        <a href="index.html" style="
-            flex: 1; 
-            padding: 15px; 
-            border-radius: 12px; 
-            border: 1px solid var(--border); 
-            color: var(--text); 
-            text-decoration: none; 
-            text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            font-weight: 600;
-        ">Cancel</a>
-
-        <button type="submit" id="submitBtn" style="flex: 2;">Join Now 🚀</button>
-    
+    <div class="btn-group">
+      <a href="index.html" class="cancel-btn">Back</a>
+      <button type="submit" id="submitBtn">Submit</button>
     </div>
-
-    <p id="msg" style="text-align:center; margin-top:15px; font-size:0.9rem;"></p>
-</form>
     <p id="msg" style="text-align:center; margin-top:15px; font-size:0.9rem;"></p>
   </form>
 </div>
-
-<footer>
-  © 2025 Code Vimarsh • Secure Registration
-</footer>
 
 <script>
 // --- PASTE YOUR GOOGLE SCRIPT LINK HERE ---
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxt5NQuDoHwLQB1ZaOkHKG30pABkXjckxOX_q6qN_ZO70JnVghL51UDf_Y27b0dYcil/exec"; 
 
-// Theme Logic
-function toggleMode() {
-  const body = document.body; body.classList.toggle("light");
-  localStorage.setItem("theme", body.classList.contains("light") ? "light" : "dark");
-}
 if(localStorage.getItem("theme") === "light") document.body.classList.add("light");
-
-// Form Logic
 const form = document.getElementById("joinForm");
 const msg = document.getElementById("msg");
 const btn = document.getElementById("submitBtn");
 
 form.addEventListener("submit", e => {
   e.preventDefault();
-  btn.disabled = true; btn.innerHTML = 'Processing...';
+  btn.disabled = true; btn.innerHTML = 'Wait...';
   fetch(SCRIPT_URL, { method: "POST", body: new FormData(form) })
-    .then(() => { msg.innerText = "🎉 Application Sent!"; msg.style.color = "var(--accent)"; form.reset(); })
-    .catch(() => { msg.innerText = "❌ Error. Try again."; msg.style.color = "#ff4d4d"; })
-    .finally(() => { btn.disabled = false; btn.innerHTML = "Submit Application"; });
+    .then(() => { msg.innerText = "🎉 Sent!"; msg.style.color = "var(--accent-cyan)"; form.reset(); })
+    .catch(() => { msg.innerText = "❌ Error."; msg.style.color = "#ff4d4d"; })
+    .finally(() => { btn.disabled = false; btn.innerHTML = "Submit"; });
 });
 </script>
-
 </body>
 </html>
