@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Code Vimarsh | Coding Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-1: #020617; --bg-2: #020617; --bg-3: #0b1026;
+  --text: #e5e7eb; --text-muted: #94a3b8;
+  --accent: #22d3ee; --accent-2: #a78bfa;
+  --card: rgba(15, 23, 42, 0.75); --border: rgba(255, 255, 255, 0.08);
+}
+.light {
+  --bg-1: #f8fafc; --bg-2: #eef2ff; --bg-3: #e0e7ff;
+  --text: #020617; --text-muted: #334155;
+  --accent: #2563eb; --accent-2: #7c3aed;
+  --card: rgba(255, 255, 255, 0.9); --border: rgba(0, 0, 0, 0.1);
+}
+
+* { box-sizing: border-box; transition: all 0.3s ease; }
+body {
+  margin: 0; font-family: 'Poppins', sans-serif; color: var(--text);
+  background: radial-gradient(circle at 20% 20%, rgba(34,211,238,0.08), transparent 40%),
+              radial-gradient(circle at 80% 30%, rgba(167,139,250,0.08), transparent 45%),
+              linear-gradient(120deg, var(--bg-1), var(--bg-3), var(--bg-2));
+  background-size: 200% 200%; animation: liveGrad 18s ease infinite; min-height: 100vh;
+}
+@keyframes liveGrad { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+/* Header & Nav */
+header {
+  position: sticky; top: 0; z-index: 100; padding: 15px 10%;
+  background: rgba(15, 23, 42, 0.25); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;
+}
+header h1 {
+  font-size: 1.5rem; font-weight: 900; margin: 0;
+  background: linear-gradient(to right, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+nav a { text-decoration: none; color: var(--text-muted); margin-left: 20px; font-weight: 500; }
+nav a:hover { color: var(--accent); }
+
+/* Layouts */
+section { padding: 60px 20px; text-align: center; }
+.hero { padding: 120px 20px; }
+.hero h2 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem); margin: 0 0 15px; font-weight: 900;
+  background: linear-gradient(to bottom, var(--text), var(--text-muted));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+/* Cards */
+.card-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; padding: 20px 10%; }
+.card {
+  background: var(--card); backdrop-filter: blur(14px); border: 1px solid var(--border);
+  border-radius: 20px; padding: 30px; text-align: center;
+}
+.card:hover { transform: translateY(-8px); border-color: var(--accent); }
+.card h4 { color: var(--accent); margin: 10px 0 5px; font-size: 1.1rem; }
+.card h3 { font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; }
+
+/* Avatar */
+.avatar {
+  width: 80px; height: 80px; margin: 0 auto 15px; border-radius: 20px; overflow: hidden;
+  border: 2px solid var(--border);
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.card:hover .avatar { border-color: var(--accent); box-shadow: 0 0 20px rgba(34, 211, 238, 0.3); }
+
+/* Form & Inputs */
+form { max-width: 450px; background: var(--card); padding: 35px; border-radius: 24px; border: 1px solid var(--border); margin: 40px auto; }
+input {
+  width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 10px; border: 1px solid var(--border);
+  background: rgba(0,0,0,0.05); color: var(--text); outline: none;
+}
+input:focus { border-color: var(--accent); }
+button {
+  width: 100%; padding: 14px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #000;
+}
+button:hover { filter: brightness(1.1); box-shadow: 0 0 20px var(--accent); }
+button:disabled { opacity: 0.7; cursor: not-allowed; }
+
+/* Footer & Utils */
+footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--border); margin-top: 40px; }
+.social-links a { margin: 0 10px; color: var(--text-muted); font-size: 1.2rem; text-decoration: none; }
+.social-links a:hover { color: var(--accent); }
+.spinner {
+  width: 16px; height: 16px; border: 2px solid #000; border-top-color: transparent; border-radius: 50%;
+  display: inline-block; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 8px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 768px) { header { flex-direction: column; gap: 10px; } }
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Code Vimarsh</h1>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#events">Events</a>
+    <a href="#team">Team</a>
+    <button onclick="toggleMode()" style="width: auto; padding: 6px 12px; margin-left: 10px;">🌓</button>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h2>Think. Code. Innovate.</h2>
+  <p>Empowering students to build real-world tech skills.</p>
+</section>
+
+<section id="events">
+  <h2>Upcoming Events</h2>
+  <div class="card-container">
+    <div class="card"><h3>Competitive Programming</h3><p>15 March 2025</p></div>
+    <div class="card"><h3>Web Bootcamp</h3><p>28 March 2025</p></div>
+    <div class="card"><h3>AI & ML Workshop</h3><p>10 April 2025</p></div>
+  </div>
+</section>
+
+<section id="team">
+  <h2>Meet the Team</h2>
+  <div class="card-container">
+    <div class="card">
+      <div class="avatar"><img src="https://i.ibb.co/84jm7bTM/president-jpg.jpg" alt="Krupal"></div>
+      <h4>Krupal Patel</h4><h3>President</h3>
+    </div>
+    <div class="card">
+      <div class="avatar"><img src="https://i.ibb.co/5xv9BRk5/team-member-jpg.jpg" alt="Shivam"></div>
+      <h4>Shivam Parmar</h4><h3>Vice President</h3>
+    </div>
+    <div class="card">
+      <div class="avatar"><img src="https://i.ibb.co/hJ6Vv5PZ/tech-lead-jpg.jpg" alt="Jay"></div>
+      <h4>Jay Prajapati</h4><h3>Tech Lead</h3>
+    </div>
+  </div>
+</section>
+
+<section id="join">
+  <div style="text-align:center; margin-bottom: 30px;">
+    <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent);" id="memberCount">0</div>
+    <p style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">Future Engineers Joined</p>
+  </div>
+  
+  <form id="joinForm">
+    <h3 style="margin-top:0; text-align:center;">Join Code Vimarsh</h3>
+    <input type="text" name="name" placeholder="Your Name" required minlength="3">
+    <input type="email" name="email" placeholder="College Email" required>
+    <input type="text" name="branch" placeholder="Branch" required>
+    <button type="submit" id="submitBtn">Join Now 🚀</button>
+    <p id="msg" style="text-align:center; margin-top:15px; font-size:0.9rem;"></p>
+  </form>
+</section>
+
+<footer>
+  <div class="social-links">
+    <a href="#" target="_blank">GitHub</a>
+    <a href="#" target="_blank">LinkedIn</a>
+    <a href="#" target="_blank">Discord</a>
+  </div>
+  <p style="margin-top:15px; opacity: 0.7;">© 2025 Code Vimarsh • Think. Code. Innovate.</p>
+</footer>
+
+<script>
+// --- 1. Theme Toggle ---
+function toggleMode() {
+  const body = document.body;
+  body.classList.toggle("light");
+  localStorage.setItem("theme", body.classList.contains("light") ? "light" : "dark");
+}
+if(localStorage.getItem("theme") === "light") document.body.classList.add("light");
+
+// --- 2. Animated Counter ---
+window.addEventListener('load', () => {
+  let count = 0, target = 150, el = document.getElementById("memberCount");
+  let timer = setInterval(() => {
+    count += target / 100;
+    if(count >= target) { el.innerText = target + "+"; clearInterval(timer); }
+    else el.innerText = Math.floor(count);
+  }, 20);
+});
+
+// --- 3. Form Submission ---
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKj1UAXwGzt5oktQrMo4KoMudeKcWJ_AYPSyDAjV1MQYvPaocmW8HLmXT2d727GzCB/exec"; 
+const form = document.getElementById("joinForm");
+const msg = document.getElementById("msg");
+const btn = document.getElementById("submitBtn");
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  
+  // Optional: Domain Validation
+  // if (!form.email.value.endsWith("@yourcollege.edu")) {
+  //   msg.innerText = "❌ Use college email only!"; msg.style.color = "#ff4d4d"; return;
+  // }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Processing...';
+  msg.innerText = "";
+
+  fetch(SCRIPT_URL, { method: "POST", body: new FormData(form) })
+    .then(() => {
+      msg.innerText = "🎉 Welcome! Check your inbox."; msg.style.color = "var(--accent)";
+      form.reset();
+    })
+    .catch(() => {
+      msg.innerText = "❌ Error. Try again."; msg.style.color = "#ff4d4d";
+    })
+    .finally(() => {
+      btn.disabled = false; btn.innerHTML = "Join Now 🚀";
+    });
+});
+</script>
+
+</body>
+</html>
