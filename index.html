@@ -8,97 +8,135 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* --- Variables --- */
+/* --- 1. Richer Variables for Deep Aesthetics --- */
 :root {
-  --bg-1: #020617; --text-main: #ffffff; --text-muted: #a1a1aa;
+  --bg-1: #020617; 
+  --text-main: #ffffff; --text-muted: #a1a1aa;
   --accent-cyan: #22d3ee; --accent-purple: #a78bfa;
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --hero-gradient: linear-gradient(to bottom right, #ffffff 30%, rgba(255,255,255,0.4));
+  /* More defined glass borders and backgrounds */
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-shine: rgba(255, 255, 255, 0.1);
+  --hero-gradient: linear-gradient(to bottom right, #ffffff 30%, rgba(255,255,255,0.5));
+  --card-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
 }
+
 .light {
   --bg-1: #eef2ff; --text-main: #020617; --text-muted: #475569;
   --accent-cyan: #0891b2; --accent-purple: #7c3aed;
-  --glass-border: rgba(0, 0, 0, 0.1); --glass-bg: rgba(255, 255, 255, 0.6);
-  --hero-gradient: linear-gradient(to bottom right, #020617 30%, rgba(2,6,23,0.6));
+  --glass-border: rgba(0, 0, 0, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-shine: rgba(255, 255, 255, 0.4);
+  --hero-gradient: linear-gradient(to bottom right, #020617 30%, rgba(2,6,23,0.7));
+  --card-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
 }
 
-* { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); -webkit-tap-highlight-color: transparent; }
+* { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; }
 body { margin: 0; font-family: 'Outfit', sans-serif; background-color: var(--bg-1); color: var(--text-main); overflow-x: hidden; min-height: 100vh; position: relative; }
 
-/* --- Background Blobs --- */
+/* --- 2. Background Blobs (Remains Same) --- */
 .blob-cont { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; pointer-events: none; overflow: hidden; }
-.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 12s infinite alternate; }
+.blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5; animation: float 12s infinite alternate; }
 .blob:nth-child(1) { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--accent-cyan); }
 .blob:nth-child(2) { bottom: -10%; right: -10%; width: 45vw; height: 45vw; background: var(--accent-purple); }
 @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(30px, 50px) scale(1.1); } }
 
-/* --- Navbar (Mobile Responsive) --- */
+/* --- 3. Ultra Glass Navbar --- */
 header {
   position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-  background: rgba(10, 10, 20, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border); padding: 10px 25px; border-radius: 50px;
+  background: rgba(15, 15, 25, 0.5); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-border); padding: 12px 30px; border-radius: 50px;
   display: flex; align-items: center; justify-content: space-between;
-  z-index: 100; box-shadow: 0 10px 40px rgba(0,0,0,0.1); width: auto; min-width: 300px;
+  z-index: 100; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: auto; min-width: 320px;
 }
-.light header { background: rgba(255, 255, 255, 0.7); }
-header h1 { font-size: 1rem; font-weight: 800; margin: 0; white-space: nowrap; }
-nav { display: flex; gap: 20px; }
-nav a { text-decoration: none; color: var(--text-muted); font-size: 0.85rem; font-weight: 500; }
-.theme-btn { background: transparent; border: none; color: var(--text-main); font-size: 1rem; cursor: pointer; padding: 0; margin-left: 15px;}
+.light header { background: rgba(255, 255, 255, 0.65); }
+header h1 { font-size: 1.1rem; font-weight: 800; margin: 0; letter-spacing: 0.5px; }
+nav { display: flex; gap: 25px; }
+nav a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
+nav a:hover { color: var(--accent-cyan); text-shadow: 0 0 10px var(--accent-cyan); }
+.theme-btn { background: transparent; border: none; color: var(--text-main); font-size: 1.1rem; cursor: pointer; padding: 0; margin-left: 15px; }
 
-/* --- Hero Section --- */
-.hero { min-height: 95vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+/* --- 4. Hero Section (With stronger gradient text) --- */
+.hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
 .hero h2 {
-  font-family: 'Space Grotesk', sans-serif; font-size: clamp(3rem, 10vw, 6rem); margin: 0; line-height: 1.1; font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif; font-size: clamp(3.5rem, 10vw, 7rem); margin: 0; line-height: 1.1; font-weight: 700;
   background: var(--hero-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 30px rgba(100,100,100,0.1));
+  filter: drop-shadow(0 0 40px rgba(150,150,150,0.15));
 }
-.hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 500px; margin-top: 20px; line-height: 1.6; }
+.hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 550px; margin-top: 25px; line-height: 1.7; }
 
-/* Glass Button */
+/* Glass Button with Shine */
 .glass-btn {
-  margin-top: 35px; padding: 14px 35px; border-radius: 30px;
+  margin-top: 40px; padding: 16px 45px; border-radius: 30px;
   background: var(--glass-bg); border: 1px solid var(--glass-border);
   color: var(--text-main); font-weight: 600; text-decoration: none;
-  backdrop-filter: blur(10px); display: inline-flex; align-items: center; gap: 8px;
+  backdrop-filter: blur(15px); position: relative; overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2); display: inline-flex; align-items: center; gap: 10px;
+}
+.glass-btn::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, var(--glass-shine), transparent);
+  transform: skewX(-25deg); transition: 0.5s;
+}
+.glass-btn:hover::before { left: 150%; }
+.glass-btn:hover {
+  border-color: var(--accent-cyan); background: rgba(34, 211, 238, 0.1);
+  box-shadow: 0 0 40px rgba(34, 211, 238, 0.3); transform: translateY(-3px);
 }
 
-/* --- Bento Grid --- */
-section { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
-.section-head { font-size: 2rem; font-weight: 700; margin-bottom: 30px; color: var(--text-main); }
-.section-head span { color: var(--accent-cyan); }
+/* --- 5. Aesthetic Bento Grid (The Main Effects) --- */
+section { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
+.section-head { font-size: 2.5rem; font-weight: 700; margin-bottom: 50px; color: var(--text-main); }
+.section-head span { color: var(--accent-cyan); font-family: 'Space Grotesk'; }
 
-.bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 .bento-item {
   background: var(--glass-bg); border: 1px solid var(--glass-border);
-  backdrop-filter: blur(16px); border-radius: 20px; padding: 30px;
-  transition: 0.3s; cursor: pointer; position: relative;
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px; padding: 35px; position: relative; overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
 }
-.bento-item:active { transform: scale(0.98); } /* Touch Feedback */
-.bento-item h3 { font-size: 1.3rem; margin: 0 0 8px; font-weight: 600; color: var(--text-main); }
-.bento-item p { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
+
+/* THE SHINE EFFECT IS BACK */
+.bento-item::after {
+  content: ""; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, var(--glass-shine), transparent);
+  transform: skewX(-20deg); transition: 0.6s; pointer-events: none;
+}
+.bento-item:hover::after { left: 150%; }
+
+/* Stronger Hover State */
+.bento-item:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: var(--card-shadow);
+}
+.bento-item:active { transform: scale(0.98); } /* Mobile tap feel */
+
+.bento-item h3 { font-size: 1.5rem; margin: 0 0 10px; font-weight: 600; color: var(--text-main); }
+.bento-item p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
 .bento-tag {
-  display: inline-block; margin-top: 15px; padding: 5px 12px; border-radius: 15px;
-  font-size: 0.75rem; font-weight: 600; background: rgba(34, 211, 238, 0.1); 
+  display: inline-block; margin-top: 20px; padding: 6px 14px; border-radius: 20px;
+  font-size: 0.8rem; font-weight: 600; background: rgba(34, 211, 238, 0.1); 
   color: var(--accent-cyan); border: 1px solid rgba(34, 211, 238, 0.2);
 }
-.avatar { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 15px; border: 2px solid var(--glass-border); padding: 2px; }
+.avatar { width: 75px; height: 75px; border-radius: 50%; margin: 0 auto 20px; border: 3px solid var(--glass-border); padding: 3px; }
 .avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
-/* --- Mobile Specific Optimization --- */
+/* --- Mobile Specific Adjustments (Keeping effects, changing layout) --- */
 @media (max-width: 768px) {
-  header { width: 90%; padding: 12px 20px; justify-content: space-between; }
-  header h1 { font-size: 0.9rem; }
-  nav { display: none; } /* Hide menu links on small mobile, keep neat */
-  .hero h2 { font-size: 3.2rem; }
-  .bento-grid { grid-template-columns: 1fr; } /* Stack cards */
-  .section-head { font-size: 1.8rem; text-align: left; }
+  header { width: 92%; padding: 12px 25px; }
+  nav { display: none; }
+  .hero h2 { font-size: 3.5rem; }
+  .bento-grid { grid-template-columns: 1fr; gap: 25px; } /* Stack on mobile */
+  .section-head { font-size: 2rem; text-align: center; }
 }
 
-footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--glass-border); margin-top: 40px; color: var(--text-muted); font-size: 0.8rem; }
-.hidden { opacity: 0; transform: translateY(30px); } .show { opacity: 1; transform: translateY(0); }
+footer { text-align: center; padding: 50px 0; border-top: 1px solid var(--glass-border); margin-top: 60px; color: var(--text-muted); background: rgba(0,0,0,0.02); }
+.hidden { opacity: 0; transform: translateY(40px); filter: blur(5px); } 
+.show { opacity: 1; transform: translateY(0); filter: blur(0); }
 </style>
 </head>
 <body>
@@ -129,7 +167,7 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--glass-
     </div>
     <div class="bento-item" onclick="window.location.href='details.html?id=web3'">
       <h3>Web3 & Blockchain</h3><p>Understanding DeFi and Smart Contracts.</p>
-      <span class="bento-tag" style="color:var(--accent-purple); border-color:var(--accent-purple);">MAR 28</span>
+      <span class="bento-tag" style="color:var(--accent-purple); border-color:var(--accent-purple); background:rgba(167,139,250,0.1);">MAR 28</span>
     </div>
     <div class="bento-item" onclick="window.location.href='details.html?id=genai'">
       <h3>GenAI Workshop</h3><p>Building LLM apps with OpenAI.</p><span class="bento-tag">APR 10</span>
@@ -142,24 +180,25 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--glass-
   <div class="bento-grid">
     <div class="bento-item" onclick="window.location.href='details.html?id=krupal'" style="text-align: center;">
       <div class="avatar"><img src="https://i.ibb.co/84jm7bTM/president-jpg.jpg"></div>
-      <h3>Krupal Patel</h3><p style="color: var(--accent-cyan); font-weight: bold; font-size: 0.8rem;">PRESIDENT</p>
+      <h3>Krupal Patel</h3><p style="color: var(--accent-cyan); font-weight: bold; font-size: 0.9rem;">PRESIDENT</p>
     </div>
     <div class="bento-item" onclick="window.location.href='details.html?id=shivam'" style="text-align: center;">
       <div class="avatar"><img src="https://i.ibb.co/5xv9BRk5/team-member-jpg.jpg"></div>
-      <h3>Shivam Parmar</h3><p style="color: var(--accent-purple); font-weight: bold; font-size: 0.8rem;">VICE PRESIDENT</p>
+      <h3>Shivam Parmar</h3><p style="color: var(--accent-purple); font-weight: bold; font-size: 0.9rem;">VICE PRESIDENT</p>
     </div>
     <div class="bento-item" onclick="window.location.href='details.html?id=jay'" style="text-align: center;">
       <div class="avatar"><img src="https://i.ibb.co/hJ6Vv5PZ/tech-lead-jpg.jpg"></div>
-      <h3>Jay Prajapati</h3><p style="color: var(--accent-cyan); font-weight: bold; font-size: 0.8rem;">TECH LEAD</p>
+      <h3>Jay Prajapati</h3><p style="color: var(--accent-cyan); font-weight: bold; font-size: 0.9rem;">TECH LEAD</p>
     </div>
   </div>
 </section>
 
-<footer><p>© 2025 Code Vimarsh • Designed for Mobile</p></footer>
+<footer><p>© 2025 Code Vimarsh • Designed for Tomorrow</p></footer>
 
 <script>
 const observer = new IntersectionObserver((entries)=>{entries.forEach((e)=>{if(e.isIntersecting)e.target.classList.add('show')})});
 document.querySelectorAll('.hidden').forEach((el)=>observer.observe(el));
+
 function toggleMode(){
   const b=document.body; b.classList.toggle("light");
   const btn=document.querySelector('.theme-btn i');
